@@ -17,3 +17,43 @@ public class ExampleScript : MonoBehaviour
     }
 }
 ```
+
+Here an example for the Unity Editor with CTRL + T Shortcut:
+
+```
+#if UNITY_EDITOR
+using UnityEngine;
+using UnityEditor;
+
+public class TakeScreenshotInEditor : ScriptableObject
+{
+	public static string fileName = "Editor Screenshot ";
+    public static int startNumber = 1;
+
+	[MenuItem ("Custom/Take Screenshot of Game View %^t")]
+	static void TakeScreenshot()
+	{
+		int number = startNumber;
+		string name = "" + number;
+
+        string fileNameFull = fileName + name + ".png";
+
+        while (System.IO.File.Exists(fileNameFull))
+		{
+			number++;
+			name = "" + number;
+		}
+
+		startNumber = number + 1;
+
+		ScreenCapture.CaptureScreenshot(fileNameFull);
+
+        // Show in Console
+		Debug.Log($"TakeScreenshotInEditor: {fileNameFull}");
+
+        // Show in Windows Explorer etc
+		Application.OpenURL("file://" + Application.dataPath.Replace("Assets", ""));
+	}
+}
+#endif
+```
