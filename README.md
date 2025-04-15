@@ -28,7 +28,7 @@ using UnityEditor;
 public class TakeScreenshotInEditor : ScriptableObject
 {
 	public static string fileName = "Editor Screenshot ";
-    public static int startNumber = 1;
+	    public static int startNumber = 1;
 
 	[MenuItem ("Custom/Take Screenshot of Game View %^t")]
 	static void TakeScreenshot()
@@ -36,9 +36,9 @@ public class TakeScreenshotInEditor : ScriptableObject
 		int number = startNumber;
 		string name = "" + number;
 
-        string fileNameFull = fileName + name + ".png";
+        	string fileNameFull = fileName + name + ".png";
 
-        while (System.IO.File.Exists(fileNameFull))
+        	while (System.IO.File.Exists(fileNameFull))
 		{
 			number++;
 			name = "" + number;
@@ -48,10 +48,10 @@ public class TakeScreenshotInEditor : ScriptableObject
 
 		ScreenCapture.CaptureScreenshot(fileNameFull);
 
-        // Show in Console
+        	// Show in Console
 		Debug.Log($"TakeScreenshotInEditor: {fileNameFull}");
 
-        // Show in Windows Explorer etc
+		// Show in Windows Explorer etc
 		Application.OpenURL("file://" + Application.dataPath.Replace("Assets", ""));
 	}
 }
